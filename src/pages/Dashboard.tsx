@@ -1,3 +1,5 @@
+import { WhiteCard } from '../components';
+
 export const Dashboard = () => {
   return (
     <>
@@ -5,7 +7,14 @@ export const Dashboard = () => {
       <p>Información general</p>
       <hr />
 
-      
+      <div className="grid">
+
+        <WhiteCard>
+          <h2>Hola Mundo</h2>
+          <p>Información general</p>
+        </WhiteCard>
+      </div>
+
     </>
-  )
-}
+  );
+};

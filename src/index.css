@@ -7,11 +7,15 @@ h1 {
   @apply text-3xl font-bold text-gray-800;
 }
 
+h2 {
+  @apply text-2xl font-semibold text-gray-800;
+}
+
 hr {
-  @apply my-1 border-gray-300 border;
+  @apply my-1 border-gray-300 border mb-3;
 }
 
 button {
-  @apply px-4 py-2 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition-all hover:shadow-lg;
+  @apply transition-all hover:bg-indigo-800 bg-indigo-600 px-8 py-2 mt-8 rounded-3xl text-gray-100 font-semibold uppercase tracking-wide shadow-md;
 }
 
