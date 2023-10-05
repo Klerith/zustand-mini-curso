@@ -1,12 +1,12 @@
 import { Navigate, Outlet } from 'react-router-dom';
 
 
-export default function App(props: any) {
-  console.log(props);
+export const Root = () => {
+  
   return (
-    <h1 className="text-3xl font-bold underline">
+    <main>
       <Outlet />
       <Navigate to="/dashboard" />
-    </h1>
+    </main>
   )
 }

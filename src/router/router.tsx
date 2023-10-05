@@ -1,6 +1,8 @@
 import { createBrowserRouter } from 'react-router-dom';
-import Root from '../Root';
+
+import { Root } from '../Root';
 import { DashboardLayout } from '../layouts';
+import { BearPage } from '../pages';
 
 
 export const router = createBrowserRouter( [
@@ -14,7 +16,7 @@ export const router = createBrowserRouter( [
         children: [
           {
             path: 'bears',
-            element: <>Hola Mundo</>
+            element: <BearPage />
             // element: <Contact />,
           },
 
