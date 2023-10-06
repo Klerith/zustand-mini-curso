@@ -1,3 +1,4 @@
+import { WhiteCard } from '../../components';
 
 
 
@@ -8,7 +9,7 @@ export const WeddingInvitationPage = () => {
       <p>Zustand segmentado en slices</p>
       <hr />
 
-      <div className="flex items-center justify-center p-12">
+      <WhiteCard className="flex items-center justify-center p-12">
         <div className="mx-auto w-full max-w-[550px]">
           <form action="https://formbold.com/s/FORM_ID" method="POST">
             <div className="-mx-3 flex flex-wrap">
@@ -17,13 +18,13 @@ export const WeddingInvitationPage = () => {
                   <label
                     className="mb-3 block text-base font-medium text-[#07074D]"
                   >
-                    First Name
+                    Primer Nombre
                   </label>
                   <input
                     type="text"
                     name="firstName"
                     id="firstName"
-                    placeholder="First Name"
+                    placeholder="Primer Nombre"
                   />
                 </div>
               </div>
@@ -32,13 +33,13 @@ export const WeddingInvitationPage = () => {
                   <label
                     className="mb-3 block text-base font-medium text-[#07074D]"
                   >
-                    Last Name
+                    Apellido
                   </label>
                   <input
                     type="text"
                     name="lastName"
                     id="lastName"
-                    placeholder="Last Name"
+                    placeholder="Apellido"
                   />
                 </div>
               </div>
@@ -47,7 +48,7 @@ export const WeddingInvitationPage = () => {
               <label
                 className="mb-3 block text-base font-medium text-[#07074D]"
               >
-                How many guest are you bringing?
+                ¿Cuántos invitados traerá?
               </label>
               <input
                 type="number"
@@ -65,7 +66,7 @@ export const WeddingInvitationPage = () => {
                   <label
                     className="mb-3 block text-base font-medium text-[#07074D]"
                   >
-                    Date
+                    Fecha de evento
                   </label>
                   <input
                     type="date"
@@ -79,7 +80,7 @@ export const WeddingInvitationPage = () => {
                   <label
                     className="mb-3 block text-base font-medium text-[#07074D]"
                   >
-                    Time
+                    Hora del evento
                   </label>
                   <input
                     type="time"
@@ -92,7 +93,7 @@ export const WeddingInvitationPage = () => {
 
             <div className="mb-5">
               <label className="mb-3 block text-base font-medium text-[#07074D]">
-                Are you coming to the event?
+                ¿Tu también vendrás?
               </label>
               <div className="flex items-center space-x-6">
                 <div className="flex items-center">
@@ -105,7 +106,7 @@ export const WeddingInvitationPage = () => {
                   <label
                     className="pl-3 text-base font-medium text-[#07074D]"
                   >
-                    Yes
+                    Si
                   </label>
                 </div>
                 <div className="flex items-center">
@@ -126,12 +127,12 @@ export const WeddingInvitationPage = () => {
 
             <div>
               <button>
-                Submit
+                Enviar
               </button>
             </div>
           </form>
         </div>
-      </div>
+      </WhiteCard>
     </>
   );
 };
