@@ -71,7 +71,7 @@ export const SideMenu = () => {
 
 
         {/* Logout */}
-        <a className="mt-10">
+        <NavLink to={'/auth/login'} className="mt-10">
           <div>
             <IoLogOutOutline />
           </div>
@@ -79,7 +79,7 @@ export const SideMenu = () => {
             <span className="text-lg text-slate-300 font-bold leading-5">Logout</span>
             <span className="text-sm text-slate-500 hidden md:block">Cerrar sesión</span>
           </div>
-        </a>
+        </NavLink>
 
       </nav>
     </div>
