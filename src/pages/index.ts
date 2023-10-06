@@ -1,4 +1,7 @@
 
 
-export * from './Dashboard';
+export * from './DashboardPage';
 export * from './BearPage';
+
+
+export * from './LoginPage';

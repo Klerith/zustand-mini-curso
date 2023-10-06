@@ -1,8 +1,8 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import { Root } from '../Root';
-import { DashboardLayout } from '../layouts';
-import { BearPage, Dashboard } from '../pages';
+import { AuthLayout, DashboardLayout } from '../layouts';
+import { BearPage, Dashboard, LoginPage } from '../pages';
 
 
 export const router = createBrowserRouter( [
@@ -10,6 +10,7 @@ export const router = createBrowserRouter( [
     path: '/',
     element: <Root />,
     children: [
+      /// Dashboard Routes
       {
         path: 'dashboard',
         element: <DashboardLayout />,
@@ -27,28 +28,20 @@ export const router = createBrowserRouter( [
 
         ]
       },
+
+      /// Auth Routes
       {
-        path: 'dashboard',
-        // element: <Dashboard />,
-        // loader: ({ request }) =>
-        //   fetch('/api/dashboard.json', {
-        //     signal: request.signal,
-        //   }),
+        path: 'auth',
+        element: <AuthLayout />,
+        children: [
+          {
+            path: 'login',
+            element: <LoginPage />
+          }
+        ]
+
       },
-      // {
-      //   element: <AuthLayout />,
-      //   children: [
-      //     {
-      //       path: 'login',
-      //       element: <Login />,
-      //       loader: redirectIfUser,
-      //     },
-      //     {
-      //       path: 'logout',
-      //       action: logoutUser,
-      //     },
-      //   ],
-      // },
+
     ],
   },
 ] );
