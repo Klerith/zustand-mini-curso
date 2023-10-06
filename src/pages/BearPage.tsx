@@ -5,7 +5,7 @@ export const BearPage = () => {
       <p>Este es un contador de osos</p>
       <hr />
 
-      
+        <button>+1</button>
 
     </>
   )
