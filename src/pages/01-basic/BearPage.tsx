@@ -2,11 +2,11 @@ export const BearPage = () => {
   return (
     <>
       <h1>Contador de Osos</h1>
-      <p>Este es un contador de osos</p>
+      <p>Manejo de estado simple de Zustand</p>
       <hr />
 
-        <button>+1</button>
+
 
     </>
-  )
-}
+  );
+};

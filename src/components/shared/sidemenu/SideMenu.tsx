@@ -1,7 +1,8 @@
 import type { IconType } from 'react-icons';
-import { IoSpeedometerOutline, IoPawOutline, IoLogOutOutline } from 'react-icons/io5';
+import { IoSpeedometerOutline, IoPawOutline, IoLogOutOutline, IoHeartOutline } from 'react-icons/io5';
 import { NavLink } from 'react-router-dom';
 import './SideMenu.css';
+import { SideMenuItem } from './SideMenuItem';
 
 
 interface MenuItem {
@@ -15,6 +16,7 @@ const menuItems: MenuItem[] = [
   { title: 'Dashboard', subTitle: 'Visualizar data', href: '/dashboard', Icon: IoSpeedometerOutline },
   { title: 'Osos', subTitle: 'Manejador de osos', href: '/dashboard/bears', Icon: IoPawOutline },
   { title: 'Persona', subTitle: 'Estado anidado', href: '/dashboard/person', Icon: IoPawOutline },
+  { title: 'Boda', subTitle: 'Invitados a la boda', href: '/dashboard/wedding-invitation', Icon: IoHeartOutline },
 ];
 
 
@@ -51,20 +53,8 @@ export const SideMenu = () => {
       <nav id="nav" className="w-full px-6">
 
         {
-          menuItems.map( ( { href, Icon, title, subTitle } ) => (
-            <NavLink
-              key={ href }
-              to={ href }
-              end
-            >
-              <div>
-                <Icon />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-lg font-bold leading-5 text-white">{ title }</span>
-                <span className="text-sm text-white/50 hidden md:block">{ subTitle }</span>
-              </div>
-            </NavLink>
+          menuItems.map( item =>(
+            <SideMenuItem key={item.href} {...item} />
           ) )
         }
 
