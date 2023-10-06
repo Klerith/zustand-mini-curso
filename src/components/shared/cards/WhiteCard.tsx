@@ -10,7 +10,7 @@ interface Props {
 export const WhiteCard = ( { children, centered, className }: Props ) => {
   return (
     <div className={
-      classNames( 'bg-white rounded-2xl border shadow-lg p-10', className, {
+      classNames( 'bg-white border rounded-[20px] p-10 shadow-3xl shadow-shadow-500 w-full', className, {
         'text-center': centered,
       } ) }>
       { children }

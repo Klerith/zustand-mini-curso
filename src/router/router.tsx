@@ -2,7 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import { Root } from '../Root';
 import { AuthLayout, DashboardLayout } from '../layouts';
-import { BearPage, Dashboard, LoginPage, WeddingInvitationPage } from '../pages';
+import { BearPage, Dashboard, JiraPage, LoginPage, WeddingInvitationPage } from '../pages';
 
 
 export const router = createBrowserRouter( [
@@ -22,6 +22,10 @@ export const router = createBrowserRouter( [
           {
             path: 'bears',
             element: <BearPage />
+          },
+          {
+            path: 'tasks',
+            element: <JiraPage />
           },
           {
             path: 'wedding-invitation',
