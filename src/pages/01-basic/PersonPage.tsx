@@ -6,7 +6,7 @@ export const PersonPage = () => {
   return (
     <>
       <h1>Persona</h1>
-      <p>Información que se compartirá a otro store</p>
+      <p>Información que se compartirá a otro store, Session Storage y Firebase</p>
       <hr />
 
       <WhiteCard className="flex items-center justify-center p-12">
