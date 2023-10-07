@@ -8,31 +8,38 @@ export const BearPage = () => {
       <hr />
 
       <div className="grid grid-cols-3 gap-2">
-        
+
         <WhiteCard centered>
           <h2>Osos Negros</h2>
 
-          <button> +1</button>
-          <span className="text-3xl mx-10"> 0 </span>
-          <button>-1</button>
+          <div>
+            <button> +1</button>
+            <span className="text-3xl mx-10"> 0 </span>
+            <button>-1</button>
+          </div>
 
         </WhiteCard>
 
         <WhiteCard centered>
           <h2>Osos Polares</h2>
 
-          <button> +1</button>
-          <span className="text-3xl mx-10"> 0 </span>
-          <button>-1</button>
+          <div>
+            <button> +1</button>
+            <span className="text-3xl mx-10"> 0 </span>
+            <button>-1</button>
+
+          </div>
 
         </WhiteCard>
 
         <WhiteCard centered>
           <h2>Osos Pandas</h2>
 
-          <button> +1</button>
-          <span className="text-3xl mx-10"> 0 </span>
-          <button>-1</button>
+          <div>
+            <button> +1</button>
+            <span className="text-3xl mx-10"> 0 </span>
+            <button>-1</button>
+          </div>
 
         </WhiteCard>
 
