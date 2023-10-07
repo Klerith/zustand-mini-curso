@@ -1,4 +1,4 @@
-import { StateStorage } from 'zustand/middleware';
+import { StateStorage, createJSONStorage } from 'zustand/middleware';
 
 
 const firebaseUrl = 'https://zustand-fire-dev-default-rtdb.firebaseio.com/zustand';
@@ -6,7 +6,7 @@ const firebaseUrl = 'https://zustand-fire-dev-default-rtdb.firebaseio.com/zustan
 const getData = async ( name: string ) => {
   try {
     const data = await fetch( `${ firebaseUrl }/${ name }.json` ).then( res => res.json() );
-    return data;
+    return JSON.stringify( data );
   } catch ( err ) {
     throw err;
   }
@@ -17,8 +17,8 @@ const setData = async ( name: string, value: string ) => {
 
     await fetch( `${ firebaseUrl }/${ name }.json`, {
       method: 'PUT',
-      body: JSON.stringify( value ),
-    } ).then( res => res.json())
+      body: value,
+    } ).then( res => res.json() );
 
     // console.log( { resp } );
     return;
@@ -30,15 +30,18 @@ const setData = async ( name: string, value: string ) => {
 
 
 
-export const firebaseStorage: StateStorage = {
+export const storage: StateStorage = {
 
   getItem: async function ( name: string ): Promise<string | null> {
     return await getData( name );
   },
   setItem: function ( name: string, value: string ): Promise<void> {
-    return setData(name, value)
+    return setData( name, value );
   },
   removeItem: function ( name: string ): void | Promise<void> {
     throw new Error( 'Function not implemented.' );
   }
 };
+
+
+export const firebaseStorage = createJSONStorage( () => storage );

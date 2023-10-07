@@ -1,8 +1,8 @@
-import { StateStorage } from 'zustand/middleware';
+import { StateStorage, createJSONStorage } from 'zustand/middleware';
 
 
 
-export const customStorage: StateStorage = {
+const storage: StateStorage = {
   getItem: function ( name: string ): string | Promise<string | null> | null {
     console.log( { name } );
     const data = sessionStorage.getItem( name );
@@ -16,3 +16,6 @@ export const customStorage: StateStorage = {
     console.log( 'removeItem', name );
   }
 };
+
+
+export const customSessionStorage = createJSONStorage(() => storage );

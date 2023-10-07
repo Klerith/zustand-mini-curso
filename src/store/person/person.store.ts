@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
-import { customStorage } from '../custom-stores/session-storage';
+// import { customStorage } from '../custom-stores/session-storage';
 import { firebaseStorage } from '../custom-stores/firebase-storage';
 
 
@@ -50,7 +50,8 @@ export const usePersonStore = create<PersonState & Actions>()(
     {
       name: 'personStore',
       // storage: createJSONStorage( () => customStorage ),
-      storage: createJSONStorage( () => firebaseStorage ),
+      // storage: createJSONStorage( () => firebaseStorage ),
+      storage: firebaseStorage,
     }
   )
 );
