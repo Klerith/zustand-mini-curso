@@ -20,6 +20,7 @@ interface BearState {
 
   addBear: () => void;
   doNothing: () => void;
+  clearBears: () => void;
 }
 
 
@@ -38,4 +39,5 @@ export const useBearStore = create<BearState>()((set) => ({
 
   doNothing: () => set(state => ({ bears: [...state.bears] })),
   addBear: () => set(state => ({ bears: [...state.bears, { id: state.bears.length + 1, name: `Oso #${ state.bears.length + 1 }` }] })),
+  clearBears: () => set( () => ({ bears: [] }))
 }))
