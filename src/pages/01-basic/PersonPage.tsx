@@ -35,6 +35,8 @@ export const PersonPage = () => {
                     name="firstName"
                     id="firstName"
                     placeholder="Primer Nombre"
+                    value={ firstName }
+                    onChange={ (e) => changeFirstName(e.target.value) }
                   />
                 </div>
               </div>
@@ -50,6 +52,8 @@ export const PersonPage = () => {
                     name="lastName"
                     id="lastName"
                     placeholder="Apellido"
+                    value={ lastName }
+                    onChange={ (e) => changeLastName(e.target.value) }
                   />
                 </div>
               </div>
@@ -58,8 +62,7 @@ export const PersonPage = () => {
             <pre className="bg-gray-200 p-5 rounded-[20px]">
               {
                 JSON.stringify({
-                  firstName: '',
-                  lastName: ''
+                  firstName, lastName
                 }, null, 2)
               }
             </pre>
