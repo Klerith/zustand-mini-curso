@@ -1,5 +1,7 @@
 import { create } from 'zustand';
-import { StateStorage, createJSONStorage, persist } from 'zustand/middleware';
+import { createJSONStorage, persist } from 'zustand/middleware';
+import { customStorage } from '../custom-stores/session-storage';
+import { firebaseStorage } from '../custom-stores/firebase-storage';
 
 
 interface PersonState {
@@ -16,20 +18,20 @@ interface Actions {
 
 
 
-const customStorage: StateStorage  ={
-  getItem: function ( name: string ): string | Promise<string | null> | null {
-    console.log({name});
-    const data = sessionStorage.getItem(name);
-    return data;
-  },
-  setItem: function ( name: string, value: string ): void | Promise<void> {
-    // console.log('setItem', { name, value });
-    sessionStorage.setItem(name, value)
-  },
-  removeItem: function ( name: string ): void | Promise<void> {
-    console.log('removeItem', name);
-  }
-}
+// const customStorage: StateStorage  ={
+//   getItem: function ( name: string ): string | Promise<string | null> | null {
+//     console.log({name});
+//     const data = sessionStorage.getItem(name);
+//     return data;
+//   },
+//   setItem: function ( name: string, value: string ): void | Promise<void> {
+//     // console.log('setItem', { name, value });
+//     sessionStorage.setItem(name, value)
+//   },
+//   removeItem: function ( name: string ): void | Promise<void> {
+//     console.log('removeItem', name);
+//   }
+// }
 
 
 
@@ -47,7 +49,8 @@ export const usePersonStore = create<PersonState & Actions>()(
     } ),
     {
       name: 'personStore',
-      storage: createJSONStorage( () => customStorage),
+      // storage: createJSONStorage( () => customStorage ),
+      storage: createJSONStorage( () => firebaseStorage ),
     }
   )
 );
