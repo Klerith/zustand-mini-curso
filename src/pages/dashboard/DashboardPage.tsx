@@ -1,3 +1,4 @@
+import { IoPawOutline } from 'react-icons/io5';
 import { WhiteCard } from '../../components';
 
 export const Dashboard = () => {
@@ -10,8 +11,9 @@ export const Dashboard = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
 
         <WhiteCard centered>
-          <h2>Hola Mundo</h2>
-          <p>Información general</p>
+          <IoPawOutline size={50} className="text-indigo-600" />
+          <h2>Osos</h2>
+          <p>Información</p>
         </WhiteCard>
       </div>
 
