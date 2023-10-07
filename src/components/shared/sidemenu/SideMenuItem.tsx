@@ -1,4 +1,4 @@
-import React from 'react';
+
 import type { IconType } from 'react-icons';
 import { NavLink } from 'react-router-dom';
 
@@ -10,7 +10,7 @@ interface Props {
 }
 
 
-export const SideMenuItem = React.memo(({ href, Icon, title, subTitle }: Props) => {
+export const SideMenuItem = ({ href, Icon, title, subTitle }: Props) => {
   return (
     <NavLink
       key={ href }
@@ -26,4 +26,4 @@ export const SideMenuItem = React.memo(({ href, Icon, title, subTitle }: Props) 
       </div>
     </NavLink>
   );
-});
+}
