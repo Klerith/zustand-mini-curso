@@ -4,11 +4,12 @@ export const LoginPage = () => {
 
   const onSubmit = (event: FormEvent<HTMLFormElement> ) => {
     event.preventDefault();
-    const { username, password, remember } = event.target as HTMLFormElement;
-    // const { username, password } = event.target as typeof event.target & {
-    //   username: { value: string };
-    //   password: { value: string };
-    // };
+    // const { username, password, remember } = event.target as HTMLFormElement;
+    const { username, password,remember } = event.target as typeof event.target & {
+      username: { value: string };
+      password: { value: string };
+      remember: { checked: boolean }
+    };
     console.log(username.value, password.value, remember.checked);
 
     username.value = '';
