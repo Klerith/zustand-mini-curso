@@ -1,8 +1,18 @@
+import { useShallow } from 'zustand/react/shallow';
 import { WhiteCard } from '../../components';
+import { usePersonStore } from '../../store';
 
 
 
 export const PersonPage = () => {
+
+  const { firstName, lastName, changeFirstName, changeLastName } = usePersonStore( useShallow( state => ({
+    firstName: state.firstName,
+    lastName: state.lastName,
+    changeFirstName: state.changeFirstName,
+    changeLastName: state.changeLastName,
+  })) )
+
   return (
     <>
       <h1>Persona</h1>
