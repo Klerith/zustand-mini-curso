@@ -2,7 +2,7 @@
 
 Este es un cascarón de proyecto, siéntete libre de usarlo para tus proyectos.
 
-<img src="https://raw.githubusercontent.com/Klerith/zustand-mini-curso/00a9794212db6a9767e49fbd43d1cf68e4075a3d/public/screenshot.png">
+<img src="https://github.com/Klerith/zustand-mini-curso/blob/main/public/screenshot.png?raw=true" alt="Dashboard Screenshot">
 
 
 
