@@ -1,11 +1,6 @@
-import { StateCreator, StoreApi, create } from 'zustand';
+import { StateCreator, create } from 'zustand';
 import { persist } from 'zustand/middleware';
-
-interface Task {
-  id: number;
-  title: string;
-  status: 'open' | 'in-progress' | 'done';
-}
+import { Task } from '../../interfaces';
 
 
 interface TaskState {
