@@ -1,17 +1,25 @@
 import { StateCreator, create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { devtools, persist } from 'zustand/middleware';
 import { Task, type TaskStatus } from '../../interfaces';
 
 
 interface TaskState {
+
+  draggingTaskId?: number;
   tasks: Task[];
-  addTask: (title: string, status: TaskStatus ) => void;
+
+  addTask: (title: string, status: TaskStatus) => void;
   changeProgress: (taskId: number, status: TaskStatus) => void;
+
+  setDraggingTaskId: (taskId: number) => void;
+  removeDraggingTaskId: () => void;
+  onTaskDrop: (status: TaskStatus) => void;
 }
 
 
 const storeApi: StateCreator<TaskState> = (set, get) => ({
 
+  draggingTaskId: undefined,
   tasks: [
     { id: 1, title: 'Task 1', status: 'open' },
     { id: 2, title: 'Task 2', status: 'in-progress' },
@@ -40,11 +48,28 @@ const storeApi: StateCreator<TaskState> = (set, get) => ({
     }));
   },
 
+  setDraggingTaskId: (taskId: number) => {
+    console.log(taskId);
+    set({ draggingTaskId: taskId });
+  },
+
+  removeDraggingTaskId: () => {
+    set({ draggingTaskId: undefined });
+  },
+  onTaskDrop: (status: TaskStatus) => {
+    const taskId = get().draggingTaskId;
+    if ( !taskId ) return;
+    
+    get().changeProgress(taskId, status);
+    get().removeDraggingTaskId();
+  }
 
 });
 
 
 
 export const useTaskStore = create<TaskState>()(
-  persist(storeApi, { name: 'task-store' })
+  devtools(
+    persist(storeApi, { name: 'task-store' })
+  )
 );
