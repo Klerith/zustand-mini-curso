@@ -1,16 +1,43 @@
-import { IoCheckmarkCircleOutline, IoEllipsisHorizontalOutline } from 'react-icons/io5';
-import { Task } from '../../interfaces';
+import { IoAddOutline, IoCheckmarkCircleOutline } from 'react-icons/io5';
+import Swal from 'sweetalert2';
+
+import { Task, TaskStatus } from '../../interfaces';
 import { SingleTask } from './SingleTask';
+import { useTaskStore } from '../../store';
 
 
 interface Props {
   title: string;
-  value: 'pending' | 'in-progress' | 'done';
+  status: TaskStatus;
   tasks: Task[];
 }
 
 
-export const JiraTasks = ({ title, tasks }: Props) => {
+export const JiraTasks = ({ title, tasks, status }: Props) => {
+  
+  const addTask = useTaskStore( state => state.addTask );
+ 
+  const handleAddTask = () => {
+    const value = Swal.fire({
+      title: 'Nueva tarea',
+      input: 'text',
+      inputLabel: 'Nombre de la tarea',
+      inputPlaceholder: 'Ingrese el nombre de la tarea',
+      showCancelButton: true,
+      inputValidator: (value) => {
+        if (!value) {
+          return 'Debe ingresar un nombre para la tarea';
+        }
+      }
+    });
+
+    console.log({value});
+
+    // addTask('New Task', status );
+
+  };
+
+
   return (
     <div className="!text-black relative flex flex-col rounded-[20px]  bg-white bg-clip-border shadow-3xl shadow-shadow-500  w-full !p-4 3xl:p-![18px]">
 
@@ -29,8 +56,8 @@ export const JiraTasks = ({ title, tasks }: Props) => {
           <h4 className="ml-4 text-xl font-bold text-navy-700">{ title }</h4>
         </div>
 
-        <button>
-          <IoEllipsisHorizontalOutline />
+        <button onClick={handleAddTask}>
+          <IoAddOutline />
         </button>
 
       </div>
