@@ -1,11 +1,10 @@
 import { IoAddOutline, IoCheckmarkCircleOutline } from 'react-icons/io5';
-import Swal from 'sweetalert2';
 
 import { Task, TaskStatus } from '../../interfaces';
 import { SingleTask } from './SingleTask';
-import { useTaskStore } from '../../store';
+
 import classNames from 'classnames';
-import { useState } from 'react';
+import { useTasks } from '../../hooks/useTasks';
 
 
 interface Props {
@@ -17,33 +16,15 @@ interface Props {
 
 export const JiraTasks = ({ title, tasks, status }: Props) => {
 
-  const [onDragOver, setOnDragOver] = useState(false)
+  const {
+    onDragOver,
+    draggingTasksId,
 
-  const addTask = useTaskStore(state => state.addTask);
-  const draggingTasksId = useTaskStore(state => state.draggingTaskId );
-  const onTaskDrop = useTaskStore(state => state.onTaskDrop );
-
-
-  const handleAddTask = async () => {
-
-    const { isConfirmed, value } = await Swal.fire({
-      title: 'Nueva tarea',
-      input: 'text',
-      inputLabel: 'Nombre de la tarea',
-      inputPlaceholder: 'Ingrese el nombre de la tarea',
-      showCancelButton: true,
-      inputValidator: (value) => {
-        if (!value) {
-          return 'Debe ingresar un nombre para la tarea';
-        }
-      }
-    });
-
-    if (!isConfirmed) return;
-    addTask(value!, status);
-
-  };
-
+    handleAddTask,
+    handleDragOver,
+    handleDrop,
+    handleDragLeave,
+  } = useTasks({status});
 
 
 
@@ -54,24 +35,9 @@ export const JiraTasks = ({ title, tasks, status }: Props) => {
         'border-blue-500 border-dotted': !!draggingTasksId && !onDragOver,
       })
     }
-      onDragOver={(e) => {
-        setOnDragOver(true);
-        e.preventDefault();
-      }}
-      
-      onDragLeave={(e) => {
-        setOnDragOver(false);
-        console.log('drag leave');
-        e.preventDefault();
-      }}
-      onDrop={(e) => {
-        setOnDragOver(false);
-        onTaskDrop(status);
-        e.preventDefault();
-        // setDrop(false);
-        // moveTask(draggedTask, state);
-        // setDraggedTask(null);
-      }}>
+      onDragOver={ handleDragOver }
+      onDragLeave={ handleDragLeave }
+      onDrop={ handleDrop }>
 
 
       {/* Task Header */}
