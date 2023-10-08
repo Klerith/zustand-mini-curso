@@ -1,17 +1,16 @@
 import { StateCreator, create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { Task } from '../../interfaces';
+import { Task, type TaskStatus } from '../../interfaces';
 
 
 interface TaskState {
   tasks: Task[];
-  addTask: ( task: Task ) => void;
-  updateTask: ( task: Task ) => void;
-  deleteTask: ( id: number ) => void;
+  addTask: (task: Task) => void;
+  changeProgress: (taskId: number, status: TaskStatus) => void;
 }
 
 
-const storeApi:StateCreator<TaskState> = ( set ) => ( {
+const storeApi: StateCreator<TaskState> = (set) => ({
 
   tasks: [
     { id: 1, title: 'Task 1', status: 'open' },
@@ -21,25 +20,26 @@ const storeApi:StateCreator<TaskState> = ( set ) => ( {
   ],
 
 
-  addTask: ( task: Task ) => {
-    set( state => ( {
-      tasks: [ ...state.tasks, task ],
-    } ) );
+  addTask: (task: Task) => {
+    set(state => ({
+      tasks: [...state.tasks, task],
+    }));
   },
 
-  updateTask: ( task: Task ) => {
-    set( state => ( {
-      tasks: state.tasks.map( t => t.id === task.id ? task : t ),
-    } ) );
+  changeProgress: (taskId: number, status: TaskStatus) => {
+    
+    set(state => ({
+      tasks: state.tasks.map(task => {
+        if (task.id === taskId) {
+          return { ...task, status };
+        }
+        return task;
+      }),
+    }));
   },
 
-  deleteTask: ( id: number ) => {
-    set( state => ( {
-      tasks: state.tasks.filter( t => t.id !== id ),
-    } ) );
-  }
 
-} );
+});
 
 
 
