@@ -5,12 +5,12 @@ import { Task, type TaskStatus } from '../../interfaces';
 
 interface TaskState {
   tasks: Task[];
-  addTask: (task: Task) => void;
+  addTask: (title: string, status: TaskStatus ) => void;
   changeProgress: (taskId: number, status: TaskStatus) => void;
 }
 
 
-const storeApi: StateCreator<TaskState> = (set) => ({
+const storeApi: StateCreator<TaskState> = (set, get) => ({
 
   tasks: [
     { id: 1, title: 'Task 1', status: 'open' },
@@ -20,14 +20,16 @@ const storeApi: StateCreator<TaskState> = (set) => ({
   ],
 
 
-  addTask: (task: Task) => {
+  addTask: (title: string, status: TaskStatus) => {
+    const newTask = { id: get().tasks.length + 1, title, status };
+
     set(state => ({
-      tasks: [...state.tasks, task],
+      tasks: [...state.tasks, newTask],
     }));
   },
 
   changeProgress: (taskId: number, status: TaskStatus) => {
-    
+
     set(state => ({
       tasks: state.tasks.map(task => {
         if (task.id === taskId) {
