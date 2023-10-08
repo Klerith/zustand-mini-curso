@@ -49,7 +49,6 @@ const storeApi: StateCreator<TaskState> = (set, get) => ({
   },
 
   setDraggingTaskId: (taskId: number) => {
-    console.log(taskId);
     set({ draggingTaskId: taskId });
   },
 
@@ -59,7 +58,7 @@ const storeApi: StateCreator<TaskState> = (set, get) => ({
   onTaskDrop: (status: TaskStatus) => {
     const taskId = get().draggingTaskId;
     if ( !taskId ) return;
-    
+
     get().changeProgress(taskId, status);
     get().removeDraggingTaskId();
   }
