@@ -1,5 +1,6 @@
 import { type StateCreator, create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { StateStorage, createJSONStorage, persist } from 'zustand/middleware';
+import { customSessionStorage } from '../storages/session-storage.storage';
 
 
 
@@ -26,9 +27,15 @@ const storeAPi: StateCreator<PersonState & Actions> = ( set ) => ( {
 
 
 
+
+
+
 export const usePersonStore = create<PersonState & Actions>()(
   persist(
     storeAPi
-  , { name: 'person-storage' })
+  , { 
+    name: 'person-storage',
+    storage: customSessionStorage,
+  })
 
 );
