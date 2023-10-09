@@ -35,5 +35,19 @@ export class AuthService {
 
   }
 
+  static checkStatus = async ():Promise<LoginResponse> => {
+    
+    try {
+        const resp = await tesloApi.get('auth/check-status');
+        console.log(resp.data);
+        
+        return resp.data;
+
+
+    } catch (error) {
+      throw new Error('Unable to check status');
+    }
+  }
+
 
 }
