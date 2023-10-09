@@ -1,5 +1,8 @@
 
 
+
+export * from './auth/RequestInfo';
+
 export * from './jira/JiraTasks';
 
 

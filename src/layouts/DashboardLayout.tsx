@@ -4,10 +4,17 @@ import { useAuthStore } from '../store/auth/auth.store';
 
 export const DashboardLayout = () => {
 
-  const isAuthenticated = useAuthStore(state => state.status === 'authorized');
-  console.log({isAuthenticated});
-  if ( !isAuthenticated ) {
-    return <Navigate to="/auth/login" />
+  const authStatus = useAuthStore(state => state.status);
+  const checkAuthStatus = useAuthStore(state => state.checkAuthStatus);
+
+  if ( authStatus === 'pending' ) {
+    checkAuthStatus();
+    return <div>Loading...</div>;
+  }
+
+
+  if ( authStatus === 'unauthorized' ) {
+    return <Navigate to="/auth/login" />;
   }
 
   return (

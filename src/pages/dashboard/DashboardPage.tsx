@@ -1,5 +1,5 @@
-import { IoAccessibilityOutline, IoHeartOutline, IoListOutline, IoLockClosedOutline, IoPawOutline } from 'react-icons/io5';
-import { WhiteCard } from '../../components';
+import { IoAccessibilityOutline, IoHeartOutline, IoInformationCircleOutline, IoListOutline, IoLockClosedOutline, IoPawOutline } from 'react-icons/io5';
+import { RequestInfo, WhiteCard } from '../../components';
 import { useBearStore, usePersonStore } from '../../store';
 
 export const Dashboard = () => {
@@ -49,6 +49,11 @@ export const Dashboard = () => {
           <p>Información</p>
         </WhiteCard>
 
+
+        <WhiteCard centered className="col-span-3">
+          <IoInformationCircleOutline size={ 50 } className="text-indigo-600" />
+          <RequestInfo />
+        </WhiteCard>
 
 
       </div>

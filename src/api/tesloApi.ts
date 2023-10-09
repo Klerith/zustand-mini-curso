@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { authStore } from '../store/auth/auth.store';
+import { useAuthStore } from '../store/auth/auth.store';
 
 
 const tesloApi = axios.create({
@@ -12,9 +12,8 @@ tesloApi.interceptors.request.use(
   (config) => {
     
     // const token = localStorage.getItem('token');
-    // const token = authStore.getState().token as string;
-    const token =''; 
-
+    const token = useAuthStore.getState().token;
+    console.log(token);
 
     if (token) {
       config.headers['Authorization'] = `Bearer ${token}`;
