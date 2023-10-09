@@ -16,7 +16,7 @@ export interface LoginResponse {
 export class AuthService {
 
 
-  static loginUser = async (email: string, password: string) => {
+  static loginUser = async (email: string, password: string):Promise<LoginResponse> => {
     try {
       const resp = await tesloApi.post<LoginResponse>('/auth/login', { email, password });
  

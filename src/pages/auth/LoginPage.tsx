@@ -1,7 +1,13 @@
 import { FormEvent } from 'react';
-import { AuthService } from '../../services/auth.service';
+import { useAuthStore } from '../../store/auth/auth.store';
+import { useNavigate } from 'react-router-dom';
 
 export const LoginPage = () => {
+
+
+  const loginUser = useAuthStore(state => state.loginUser);
+  const navigate = useNavigate();
+
 
   const onSubmit = async(event: FormEvent<HTMLFormElement> ) => {
     event.preventDefault();
@@ -12,14 +18,17 @@ export const LoginPage = () => {
       remember: { checked: boolean }
     };
     // console.log(username.value, password.value, remember.checked);
-
-    await AuthService.loginUser(username.value, password.value);
-
-
-
-    username.value = '';
-    password.value = '';
-    remember.checked = false;
+    try {
+      await loginUser(username.value, password.value);
+      navigate('/dashboard');
+  
+      username.value = '';
+      password.value = '';
+      remember.checked = false;
+      
+    } catch (error) {
+      console.log('no se pudo autenticar');
+    }
   }
 
 

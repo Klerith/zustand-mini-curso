@@ -5,6 +5,7 @@ import { AuthLayout, DashboardLayout } from '../layouts';
 import { BearPage, Dashboard, JiraPage, LoginPage, PersonPage, WeddingInvitationPage } from '../pages';
 
 
+
 export const router = createBrowserRouter( [
   {
     path: '/',
