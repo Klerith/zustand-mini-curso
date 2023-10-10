@@ -1,9 +1,12 @@
 import { StateCreator, create } from 'zustand';
 import { v4 as uuidv4 } from 'uuid';
 
+import { devtools, persist } from 'zustand/middleware';
+// import { produce } from 'immer';
 
 import type { Task, TaskStatus } from '../../interfaces';
-import { devtools } from 'zustand/middleware';
+import { immer } from 'zustand/middleware/immer';
+
 
 
 interface TaskState {
@@ -22,7 +25,7 @@ interface TaskState {
 
 
 
-const storeApi: StateCreator<TaskState> = (set, get) => ({
+const storeApi: StateCreator<TaskState, [["zustand/immer", never]]> = (set, get) => ({
 
   draggingTaskId: undefined,
   tasks: {
@@ -43,12 +46,23 @@ const storeApi: StateCreator<TaskState> = (set, get) => ({
 
     const newTask = { id: uuidv4(), title, status };
 
-    set( state => ({
-      tasks: {
-        ...state.tasks,
-        [newTask.id]: newTask
-      }
-    }))
+    set( state => {
+      state.tasks[newTask.id] = newTask;
+    });
+
+
+    //? Requiere npm install immer
+    // set( produce( (state: TaskState) => {
+    //   state.tasks[newTask.id] = newTask;
+    // }))
+
+    //? Forma nativa de Zustand
+    // set( state => ({
+    //   tasks: {
+    //     ...state.tasks,
+    //     [newTask.id]: newTask
+    //   }
+    // }))
 
   },
 
@@ -63,15 +77,23 @@ const storeApi: StateCreator<TaskState> = (set, get) => ({
 
   changeTaskStatus: (taskId: string, status: TaskStatus) => {
 
-    const task = get().tasks[taskId];
+    const task = {...get().tasks[taskId] };
     task.status = status;
 
-    set( (state) => ({
-      tasks: {
-        ...state.tasks,
-        [taskId]: task,
-      }
-    }))
+    set( state => {
+      state.tasks[taskId] = {
+        ...task,
+        // ...state.tasks[taskId],
+        // status,
+      };
+    });
+    
+    // set( (state) => ({
+    //   tasks: {
+    //     ...state.tasks,
+    //     [taskId]: task,
+    //   }
+    // }))
 
   },
 
@@ -88,6 +110,10 @@ const storeApi: StateCreator<TaskState> = (set, get) => ({
 
 export const useTaskStore = create<TaskState>()(
   devtools(
-    storeApi
+    persist(
+      immer(storeApi)
+    ,{ name: 'task-store' })
   )
 );
+
+// task-store
