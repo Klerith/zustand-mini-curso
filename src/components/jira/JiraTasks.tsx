@@ -1,5 +1,5 @@
 import { DragEvent, useState } from 'react';
-import { IoCheckmarkCircleOutline, IoEllipsisHorizontalOutline } from 'react-icons/io5';
+import { IoAddOutline, IoCheckmarkCircleOutline } from 'react-icons/io5';
 import classNames from 'classnames';
 
 
@@ -20,10 +20,14 @@ interface Props {
 export const JiraTasks = ( { title, value, tasks }: Props ) => {
 
   const isDragging = useTaskStore( state => !!state.draggingTaskId );
-  const changeTaskStatus = useTaskStore( state => state.changeTaskStatus );
-  const draggingTaskId = useTaskStore( state => state.draggingTaskId );
+  const onTaskDrop = useTaskStore( state => state.onTaskDrop );
+  const addTask = useTaskStore( state => state.addTask );
 
   const [onDragOver, setOnDragOver] = useState(false)
+
+  const handleAddTask = () => {
+    addTask('Nuevo Titulo', value);
+  }
 
 
   const handleDragOver = (event: DragEvent<HTMLDivElement>) => {
@@ -39,7 +43,7 @@ export const JiraTasks = ( { title, value, tasks }: Props ) => {
   const handleDrop = (event: DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     setOnDragOver(false);
-    changeTaskStatus(draggingTaskId!, value);
+    onTaskDrop(value);
   };
 
 
@@ -71,8 +75,8 @@ export const JiraTasks = ( { title, value, tasks }: Props ) => {
           <h4 className="ml-4 text-xl font-bold text-navy-700">{ title }</h4>
         </div>
 
-        <button>
-          <IoEllipsisHorizontalOutline />
+        <button onClick={ handleAddTask }>
+          <IoAddOutline />
         </button>
 
       </div>
