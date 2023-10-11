@@ -12,13 +12,13 @@ export interface AuthState {
   user?:  User;
 
   loginUser: (email: string, password: string ) => Promise<void>;
-
+  checkAuthStatus: () => Promise<void>;
 }
 
 
 const storeApi: StateCreator<AuthState> = (set) => ({
 
-  status: 'unauthorized',
+  status: 'pending',
   token: undefined,
   user: undefined,
 
@@ -31,8 +31,20 @@ const storeApi: StateCreator<AuthState> = (set) => ({
 
     } catch (error) {
       set({ status: 'unauthorized', token: undefined, user: undefined });
+      throw 'Unauthorized';
     }
 
+  },
+
+  checkAuthStatus: async() => {
+
+    try {
+      const { token, ...user } = await AuthService.checkStatus();
+      set({ status: 'authorized', token, user });
+
+    } catch (error) {
+      set({ status: 'unauthorized', token: undefined, user: undefined })
+    }
   }
 
 });
