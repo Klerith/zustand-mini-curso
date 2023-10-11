@@ -42,6 +42,7 @@ export const createDateSlice: StateCreator<DateSlice> = (set, get) => ({
     const newDate = new Date( state.eventDate );
     newDate.setFullYear(year, month, day);
 
+
     return { eventDate: newDate };
 
   }),
