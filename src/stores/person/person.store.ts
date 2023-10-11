@@ -1,8 +1,9 @@
 import { type StateCreator, create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
+import { useWeddingBoundStore } from '../wedding';
 // import { customSessionStorage } from '../storages/session.storage';
-import { firebaseStorage } from '../storages/firebase.storage';
-import { logger } from '../middlewares/logger.middleware';
+// import { firebaseStorage } from '../storages/firebase.storage';
+// import { logger } from '../middlewares/logger.middleware';
 
 
 
@@ -29,9 +30,6 @@ const storeAPi: StateCreator<PersonState & Actions, [ [ "zustand/devtools", neve
 
 
 
-
-
-
 export const usePersonStore = create<PersonState & Actions>()(
   devtools(
     persist(
@@ -44,3 +42,11 @@ export const usePersonStore = create<PersonState & Actions>()(
   )
 );
 
+usePersonStore.subscribe( (nextState, /*prevState*/)  => {
+
+  const { firstName, lastName } = nextState;
+
+  useWeddingBoundStore.getState().setFirstName(firstName);
+  useWeddingBoundStore.getState().setLastName(lastName);
+  
+});
