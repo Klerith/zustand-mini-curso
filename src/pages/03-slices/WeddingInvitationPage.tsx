@@ -16,7 +16,9 @@ export const WeddingInvitationPage = () => {
 
   const eventYYYYMMDD = useWeddingBoundStore( state => state.eventYYYYMMDD() );
   const eventHHMM = useWeddingBoundStore( state => state.eventHHMM() );
+  
   const setEventDate = useWeddingBoundStore( state => state.setEventDate )
+  const setEventTime = useWeddingBoundStore( state => state.setEventTime )
 
 
   return (
@@ -27,7 +29,7 @@ export const WeddingInvitationPage = () => {
 
       <WhiteCard className="flex items-center justify-center p-12">
         <div className="mx-auto w-full max-w-[550px]">
-          <form action="https://formbold.com/s/FORM_ID" method="POST">
+          <form>
             <div className="-mx-3 flex flex-wrap">
               <div className="w-full px-3 sm:w-1/2">
                 <div className="mb-5">
@@ -111,6 +113,7 @@ export const WeddingInvitationPage = () => {
                     name="eventTime"
                     id="eventTime"
                     value={ eventHHMM }
+                    onChange={ (e) => setEventTime( e.target.value ) }
                   />
                 </div>
               </div>
