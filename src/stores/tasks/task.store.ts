@@ -25,7 +25,7 @@ interface TaskState {
 
 
 
-const storeApi: StateCreator<TaskState, [["zustand/immer", never]]> = (set, get) => ({
+const storeApi: StateCreator<TaskState, [["zustand/devtools", never], ["zustand/persist", unknown], ["zustand/immer", never]], []> = (set, get) => ({
 
   draggingTaskId: undefined,
   tasks: {
@@ -48,7 +48,7 @@ const storeApi: StateCreator<TaskState, [["zustand/immer", never]]> = (set, get)
 
     set( state => {
       state.tasks[newTask.id] = newTask;
-    });
+    }, false, 'addTask');
 
 
     //? Requiere npm install immer
@@ -68,11 +68,11 @@ const storeApi: StateCreator<TaskState, [["zustand/immer", never]]> = (set, get)
 
 
   setDraggingTaskId: (taskId: string) => {
-    set({ draggingTaskId: taskId })
+    set({ draggingTaskId: taskId },false, 'setDragging')
   },
 
   removeDraggingTaskId: () => {
-    set({ draggingTaskId: undefined });
+    set({ draggingTaskId: undefined }, false, 'removeDragging');
   },
 
   changeTaskStatus: (taskId: string, status: TaskStatus) => {
@@ -86,7 +86,7 @@ const storeApi: StateCreator<TaskState, [["zustand/immer", never]]> = (set, get)
         // ...state.tasks[taskId],
         // status,
       };
-    });
+    }, false, 'changeTaskStatus');
     
     // set( (state) => ({
     //   tasks: {
